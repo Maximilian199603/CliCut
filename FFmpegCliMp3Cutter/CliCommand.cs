@@ -92,6 +92,16 @@ internal sealed class CliCommand : Command<CliCommand.Settings>
 
     private int PrettyPrintError(int error)
     {
+        int err = error switch
+        {
+            1 => 1,
+            2 => 2,
+            3 => 3,
+            4 => 4,
+            5 => 5,
+            6 => 6,
+            _ => error
+        };
         return error;
     }
 

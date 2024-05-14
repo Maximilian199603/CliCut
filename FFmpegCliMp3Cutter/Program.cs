@@ -7,6 +7,11 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        ErrorPrettyPrinter printer = new ErrorPrettyPrinter(0);
+        printer.PrettyPrint();
+        return;
+
+
         if (args.Length == 0)
         {
             //print help message
