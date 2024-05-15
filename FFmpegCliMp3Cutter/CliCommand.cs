@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using FFmpegCliMp3Cutter.FFmpeg;
+﻿using FFmpegCliMp3Cutter.FFmpeg;
 using Spectre.Console.Cli;
-using static FFmpegCliMp3Cutter.CliCommand;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace FFmpegCliMp3Cutter;
 internal sealed class CliCommand : Command<CliCommand.Settings>
@@ -20,7 +12,7 @@ internal sealed class CliCommand : Command<CliCommand.Settings>
         [CommandArgument(0, "[filePath]")]
         public string? FilePath { get; init; }
         [CommandOption("-f|--front")]
-        public string? FrontCut {  get; init; }
+        public string? FrontCut { get; init; }
         [CommandOption("-b|--back")]
         public string? BackCut { get; init; }
     }

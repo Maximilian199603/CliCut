@@ -7,7 +7,7 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        ErrorPrettyPrinter printer = new ErrorPrettyPrinter(0);
+        ErrorPrettyPrinter printer = new ErrorPrettyPrinter(1);
         printer.PrettyPrint();
         return;
 
@@ -32,7 +32,7 @@ internal class Program
         }
     }
 
-    private static string WrapInSquare(string input, string textStyling,string bracketStyling)
+    private static string WrapInSquare(string input, string textStyling, string bracketStyling)
     {
         return $"[{bracketStyling}][[[/][{textStyling}]{input}[/][{bracketStyling}]]][/]";
     }
