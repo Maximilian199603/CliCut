@@ -94,6 +94,21 @@ internal class ErrorPrettyPrinter
         }
     }
 
+    public int PrettyPrint(int errorCode)
+    {
+        // Try to retrieve the pretty print function for the given error code
+        if (errorPrinters.TryGetValue(errorCode, out Func<int>? prettyPrintFunction))
+        {
+            // Invoke the pretty print function and return its result
+            return prettyPrintFunction?.Invoke() ?? PrettyPrintUnknownError(errorCode);
+        }
+        else
+        {
+            // Handle unknown error code
+            return PrettyPrintUnknownError(errorCode);
+        }
+    }
+
     // Method to pretty print error 0
     private int PrettyPrintError0()
     {
@@ -216,7 +231,7 @@ internal class ErrorPrettyPrinter
     }
 
     // Method to pretty print unknown error code
-    public int PrettyPrintUnknownError(int errorCode)
+    private int PrettyPrintUnknownError(int errorCode)
     {
         // Unknown error code
         string first = "During execution,";

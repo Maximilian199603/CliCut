@@ -27,7 +27,8 @@ internal sealed class CliCommand : Command<CliCommand.Settings>
         if (errorValue != 0)
         {
             //replace return with a function that still returns the errorcode but also prints a message 
-            return PrettyPrintError(errorValue);
+            ErrorPrettyPrinter printer = new ErrorPrettyPrinter(errorValue);
+            return printer.PrettyPrint();
         }
 
         //Start execution
