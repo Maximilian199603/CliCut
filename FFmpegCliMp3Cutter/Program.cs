@@ -1,4 +1,6 @@
 ﻿using Spectre.Console;
+using FFmpegCliMp3Cutter;
+using FFmpegCliMp3Cutter.FFmpeg;
 using static FFmpegCliMp3Cutter.GlobalValues;
 
 namespace FFmpegCliMp3Cutter;
@@ -7,11 +9,6 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        ErrorPrettyPrinter printer = new ErrorPrettyPrinter(1);
-        printer.PrettyPrint();
-        return;
-
-
         if (args.Length == 0)
         {
             //print help message

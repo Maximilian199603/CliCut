@@ -21,7 +21,7 @@ internal class ErrorPrettyPrinter
         errorPrinters = InitializeErrorPrinters();
     }
 
-    public ErrorPrettyPrinter(): this(0)
+    public ErrorPrettyPrinter() : this(0)
     {
     }
 

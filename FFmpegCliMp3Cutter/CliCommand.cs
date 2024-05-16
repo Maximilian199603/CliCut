@@ -19,15 +19,45 @@ internal sealed class CliCommand : Command<CliCommand.Settings>
 
     public override int Execute(CommandContext context, Settings settings)
     {
+
+        //TODO: this entire section needs rework
         var pathValidation = ValidatePath(settings.FilePath);
         var frontValidation = ValidateTimeStamp(settings.FrontCut);
         var backValidation = ValidateTimeStamp(settings.BackCut);
+        int fronterrorCode = 0;
+        int backerrorCode = 0;
+        TimeStampWrap frontStamp;
+        TimeStampWrap backStamp;
+        try
+        {
+            frontStamp = new TimeStampWrap(settings.FrontCut);
+        }
+        catch (ArgumentException)
+        {
+            frontStamp = new TimeStampWrap();
+            fronterrorCode = 3;
+        }
 
-        int errorValue = ExecutionErrorDecider(pathValidation.error, frontValidation.error, backValidation.error);
+        try
+        {
+            backStamp = new TimeStampWrap(settings.BackCut);
+        }
+        catch (ArgumentException)
+        {
+            backStamp = new TimeStampWrap();
+            backerrorCode = 3;
+        }
+
+        int errorValue = ExecutionErrorDecider(pathValidation.error, fronterrorCode, backerrorCode);
         if (errorValue != 0)
         {
             //replace return with a function that still returns the errorcode but also prints a message 
             ErrorPrettyPrinter printer = new ErrorPrettyPrinter(errorValue);
+            return printer.PrettyPrint();
+        }
+        if (frontStamp.Empty && backStamp.Empty)
+        {
+            ErrorPrettyPrinter printer = new ErrorPrettyPrinter(6);
             return printer.PrettyPrint();
         }
 
