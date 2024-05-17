@@ -1,6 +1,6 @@
-﻿using CliWrap.Builders;
-using CliWrap;
-using CliWrap.Buffered;
+﻿using CliWrap;
+using CliWrap.Builders;
+using CliWrap.Exceptions;
 using Spectre.Console;
 
 namespace FFmpegCliMp3Cutter.FFmpeg;
@@ -9,7 +9,6 @@ internal class FFmpegCutTask
     private FileInfo _file;
     private TimeStampWrap _front;
     private TimeStampWrap _back;
-    public bool InPath { get; set; }
     public FFmpegCutTask(string input, TimeStampWrap front, TimeStampWrap back)
     {
         _front = front;
@@ -22,13 +21,6 @@ internal class FFmpegCutTask
         string outputPath = GetOutputFileName(_file);
         ArgumentsBuilder args = new ArgumentsBuilder();
         bool invalid = false;
-        // Check if ffmpeg path should be included in the command
-        string ffmpegPath = "ffmpeg"; // Default ffmpeg path
-        if (!InPath)
-        {
-            // Use custom ffmpeg path
-            ffmpegPath = @"path\to\ffmpeg.exe"; // Update with the custom ffmpeg path
-        }
         //in switch assemble the command for ffmpeg
         switch ((_front.Empty, _back.Empty))
         {
@@ -74,11 +66,11 @@ internal class FFmpegCutTask
 
         try
         {
-            //add stdout and stderr redirect
-            var result = await Cli.Wrap(ffmpegPath)
+            var result = await Cli.Wrap("ffmpeg")
                 .WithArguments(args.Build())
                 .ExecuteAsync();
-        }catch (Exception ex)
+        }
+        catch (CommandExecutionException ex)
         {
             AnsiConsole.WriteException(ex);
         }

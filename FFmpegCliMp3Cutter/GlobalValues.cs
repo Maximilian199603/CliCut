@@ -1,4 +1,7 @@
-﻿namespace FFmpegCliMp3Cutter;
+﻿using Tomlet;
+using Tomlet.Models;
+
+namespace FFmpegCliMp3Cutter;
 internal class GlobalValues
 {
     public const string ApplicationName = "App";

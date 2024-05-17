@@ -1,4 +1,6 @@
 ﻿using FFmpegCliMp3Cutter.FFmpeg;
+using FFmpegCliMp3Cutter.Spectre;
+using Spectre.Console;
 using Spectre.Console.Cli;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
@@ -19,11 +21,9 @@ internal sealed class CliCommand : Command<CliCommand.Settings>
 
     public override int Execute(CommandContext context, Settings settings)
     {
-
+        //Note: While this code does its purpose it is not of good Quality and needs work
         //TODO: this entire section needs rework
         var pathValidation = ValidatePath(settings.FilePath);
-        var frontValidation = ValidateTimeStamp(settings.FrontCut);
-        var backValidation = ValidateTimeStamp(settings.BackCut);
         int fronterrorCode = 0;
         int backerrorCode = 0;
         TimeStampWrap frontStamp;
@@ -60,12 +60,12 @@ internal sealed class CliCommand : Command<CliCommand.Settings>
             ErrorPrettyPrinter printer = new ErrorPrettyPrinter(6);
             return printer.PrettyPrint();
         }
-
+        FFmpegCutTask task = new FFmpegCutTask(pathValidation.result, frontStamp, backStamp);
         //Start execution
         //Run ffmpeg on selected file
-
-
-        //Everything succeeded
+        var style = new SpinnerStyle("Processing ...", Spinner.Known.Aesthetic, new Style(Color.Cyan1), new Style(Color.Purple));
+        FFmpegTaskRunSpinner spin = new FFmpegTaskRunSpinner(style);
+        spin.Run(task);
         return 0;
     }
 
