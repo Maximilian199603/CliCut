@@ -1,8 +1,6 @@
-﻿using FFmpegCliMp3Cutter.FFmpeg;
-using FFmpegCliMp3Cutter.Spectre;
+﻿using FFmpegCliMp3Cutter.Styling;
 using Spectre.Console;
 using static FFmpegCliMp3Cutter.GlobalValues;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FFmpegCliMp3Cutter;
 
