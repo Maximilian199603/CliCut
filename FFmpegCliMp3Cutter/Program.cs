@@ -2,6 +2,7 @@
 using FFmpegCliMp3Cutter.Spectre;
 using Spectre.Console;
 using static FFmpegCliMp3Cutter.GlobalValues;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FFmpegCliMp3Cutter;
 
@@ -11,8 +12,13 @@ internal class Program
     {
         //check for palette.toml file check if it conforms to the standard
         //load it in the place where defaultpalette is
-
-        return;
+        //test values
+        //common = BB22EE
+        //highlight = CC00DD
+        //error = CE2029
+        //success = 00C800
+        //accent = 7755FF
+        //bg = 435460
         if (args.Length == 0)
         {
             //print help message
