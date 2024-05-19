@@ -84,7 +84,7 @@ internal class FFmpegTaskRunSpinner
     }
 
 
-    private (int completed, int failed, int total) RunAsPool(List<FFmpegCutTask> tasks, TaskStatusPrinter stat, int maxConcurrency)
+    private (int completed, int failed) RunAsPool(List<FFmpegCutTask> tasks, TaskStatusPrinter stat, int maxConcurrency)
     {
         Tracker tracker = new Tracker();
         tracker.Total = tasks.Count;
@@ -97,7 +97,7 @@ internal class FFmpegTaskRunSpinner
         }
         Task.WaitAll(taskList.ToArray());
         semaphore.Release();
-        return (tracker.Completed, tracker.Failed, tracker.Total);
+        return (tracker.Completed, tracker.Failed);
     }
 
     private void ExecuteTask(FFmpegCutTask task, SemaphoreSlim semaphore,
