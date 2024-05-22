@@ -1,5 +1,4 @@
 ﻿using FFmpegCliMp3Cutter.Toml;
-using System.Drawing;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Tomlet;

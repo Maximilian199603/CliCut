@@ -59,6 +59,7 @@ internal class FFmpegTaskRunSpinner
         var totalExecutionTime = stopwatch.Elapsed;
         var averageTimePerTask = totalExecutionTime / tasks.Count;
 
+        //grab values from colourpalette
         HexStyle success = new HexStyle("00C800");
         HexStyle failure = new HexStyle("CE2029");
         HexStyle accent = new HexStyle("7755FF");
