@@ -49,6 +49,8 @@ internal class FFmpegTaskRunSpinner
     //var init = new SpinnerStyle("Starting", Spinner.Known.Ascii, new Style(Color.Cyan1), new Style(Color.CornflowerBlue, Color.DeepPink4));
     //FFmpegTaskRunSpinner spin = new FFmpegTaskRunSpinner(init);
     //spin.RunFFmpegCutTasks(tasks, 10);
+
+    // make version that can run an wraped async task
     public void RunFFmpegCutTasks(List<FFmpegCutTask> tasks)
     {
         var stopwatch = Stopwatch.StartNew();
