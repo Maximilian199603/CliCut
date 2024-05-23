@@ -1,11 +1,7 @@
 ﻿using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace FFmpegCliMp3Cutter.Styling;
+namespace FFmpegCliMp3Cutter.Spectre;
 
 class HexStyle
 {
@@ -36,7 +32,7 @@ class HexStyle
         _decoration = decorator;
     }
 
-    public HexStyle(string foreground, Decoration decorator) : this(foreground, "", decorator){}
+    public HexStyle(string foreground, Decoration decorator) : this(foreground, "", decorator) { }
 
     public HexStyle(string foreground) : this(foreground, "", Decoration.None) { }
 
@@ -66,7 +62,7 @@ class HexStyle
         }
 
         // Check if hexColor has a valid length and consists only of hexadecimal characters
-        return (hexColor.Length == 6) && hexColor.All(Uri.IsHexDigit);
+        return hexColor.Length == 6 && hexColor.All(Uri.IsHexDigit);
     }
 
     private bool IsValidForeGroundHexColor(string? hexColor)
@@ -84,7 +80,7 @@ class HexStyle
         }
 
         // Check if hexColor has a valid length and consists only of hexadecimal characters
-        return (hexColor.Length == 6) && hexColor.All(Uri.IsHexDigit);
+        return hexColor.Length == 6 && hexColor.All(Uri.IsHexDigit);
     }
 
     public string ToMarkup()

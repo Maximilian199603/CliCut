@@ -10,7 +10,7 @@ internal sealed class CliCommand : Command<CliCommand.Settings>
 {
     public sealed class Settings : CommandSettings
     {
-        [Description("Path to target file. Defaults to current directory.")]
+        [Description("Path to target file.")]
         [CommandArgument(0, "[filePath]")]
         public string? FilePath { get; init; }
         [CommandOption("-f|--front")]
@@ -21,6 +21,12 @@ internal sealed class CliCommand : Command<CliCommand.Settings>
 
     public override int Execute(CommandContext context, Settings settings)
     {
+
+        //Console.WriteLine("We are executing in CLI mode");
+        //Debug prints
+        //Console.WriteLine($"Path = [{settings.FilePath}]");
+        //Console.WriteLine($"Front = [{settings.FrontCut}]");
+        //Console.WriteLine($"Back = [{settings.BackCut}]");
         //Note: While this code does its purpose it is not of good Quality and needs work
         //TODO: this entire section needs rework
         var pathValidation = ValidatePath(settings.FilePath);
@@ -63,8 +69,7 @@ internal sealed class CliCommand : Command<CliCommand.Settings>
         FFmpegCutTask task = new FFmpegCutTask(pathValidation.result, frontStamp, backStamp);
         //Start execution
         //Run ffmpeg on selected file
-        var style = new SpinnerStyle("Processing ...", Spinner.Known.Aesthetic, new Style(Color.Cyan1), new Style(Color.Purple));
-        FFmpegTaskRunSpinner spin = new FFmpegTaskRunSpinner(style);
+        FFmpegTaskRunSpinner spin = new FFmpegTaskRunSpinner();
         spin.Run(task);
         return 0;
     }

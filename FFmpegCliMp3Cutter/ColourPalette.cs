@@ -1,19 +1,20 @@
-﻿using FFmpegCliMp3Cutter.Toml;
+﻿using FFmpegCliMp3Cutter.Spectre;
+using FFmpegCliMp3Cutter.Toml;
+using Spectre.Console;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Tomlet;
 using Tomlet.Attributes;
 using Tomlet.Models;
 
-namespace FFmpegCliMp3Cutter.Styling;
-internal class ColourPalette
+namespace FFmpegCliMp3Cutter;
+public class ColourPalette
 {
     private readonly TomlDocument _ext;
     private readonly TomlDocument _def;
 
     private bool _extEmpty = false;
 
-    //Add properties
     [TomlProperty("Reserved.Common")]
     public string Common => RetrieveValue();
     [TomlProperty("Reserved.HighLight")]
@@ -27,7 +28,7 @@ internal class ColourPalette
     [TomlProperty("Reserved.Background")]
     public string Background => RetrieveValue();
     [TomlProperty("Primary.Red")]
-    public string Red => RetrieveValue(); 
+    public string Red => RetrieveValue();
     [TomlProperty("Primary.Green")]
     public string Green => RetrieveValue();
     [TomlProperty("Primary.Blue")]
@@ -50,12 +51,14 @@ internal class ColourPalette
     public string LightGray => RetrieveValue();
     [TomlProperty("Contrast.DarkGray")]
     public string DarkGray => RetrieveValue();
+    [TomlProperty("Process.Spinner")]
+    public Spinner Spinner => GetSpinner();
 
     public ColourPalette()
     {
         //populate default tomldoc
         _def = GenerateDefault();
-        _ext = FromFile(Path.Combine(GlobalValues.ConfigPath,"palette.toml"));
+        _ext = FromFile(Path.Combine(GlobalValues.ConfigPath, "palette.toml"));
     }
 
     private TomlDocument FromFile(string path)
@@ -107,7 +110,6 @@ internal class ColourPalette
         TomlValue value = doc.GetValue(key);
         return value.StringValue;
     }
-
     private string RetrieveValue([CallerMemberName] string propertyName = "")
     {
         PropertyInfo? property = typeof(ColourPalette).GetProperty(propertyName);
@@ -124,6 +126,12 @@ internal class ColourPalette
         return string.Empty;
     }
 
+    private Spinner GetSpinner()
+    {
+        string val = GetValue("Process.Spinner");
+        return SpinnerParser.Parse(val);
+    }
+
     private TomlDocument GenerateDefault()
     {
         TomlParser parser = new TomlParser();
@@ -136,7 +144,7 @@ internal class ColourPalette
         d.Put("Reserved.Accent", "#7755FF");
         d.Put("Reserved.Background", "#435460");
 
-        d.Put("Primary.Red", "#FF0000"); 
+        d.Put("Primary.Red", "#FF0000");
         d.Put("Primary.Orange", "#FFA500");
         d.Put("Primary.Yellow", "#FFFF00");
         d.Put("Primary.Green", "#008000");
@@ -149,6 +157,9 @@ internal class ColourPalette
         d.Put("Contrast.Gray", "#808080");
         d.Put("Contrast.LightGray", "#A1A1A1");
         d.Put("Contrast.DarkGray", "#606060");
+
+        //d.Put("Process.Spinner", "Aesthetic");
+        d.Put("Process.Spinner", "simpleDots");
         return d;
     }
 }
