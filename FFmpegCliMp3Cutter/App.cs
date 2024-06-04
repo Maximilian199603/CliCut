@@ -4,6 +4,7 @@ using System.Text;
 namespace FFmpegCliMp3Cutter;
 internal class App
 {
+    //remove file extension checking
     private string[] args;
 
     public App(string[] args)
@@ -17,17 +18,11 @@ internal class App
 
         app.Configure(config =>
         {
-            config.AddCommand<CliCommand>("")
-            .WithAlias("cli")
+            config.AddCommand<CliCommand>("cut")
             .WithDescription(CLIDesc())
-            .WithExample("", @"C:\user\selected.mp3", "-f", "01:30", "-b", "02:00")
-            .WithExample("", @"C:\user\selected.mp3", "-f", "01:30")
-            .WithExample("", @"C:\user\selected.mp3", "-b", "02:00");
-
-            config.AddCommand<BatchCommand>("file")
-            .WithAlias("batch")
-            .WithExample("file", @"C:\user\example.txt")
-            .WithDescription(BatchDesc());
+            .WithExample("cut", @"C:\user\selected.mp3", "-f", "01:30", "-b", "02:00")
+            .WithExample("cut", @"C:\user\selected.mp3", "-f", "01:30")
+            .WithExample("cut", @"C:\user\selected.mp3", "-b", "02:00");
         });
 
         return app.Run(args);

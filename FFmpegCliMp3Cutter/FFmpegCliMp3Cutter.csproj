@@ -5,6 +5,25 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>EdgeLordKirito.Mp3FileCut</PackageId>
+    <Version>0.0.1</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>CliMp3Cut</Title>
+    <Authors>CliMp3Cut</Authors>
+    <Company>EdgeLordKirito</Company>
+    <Product>CliMp3Cut</Product>
+    <Description>A console tool that allows for an abstraction between the user and FFmpeg</Description>
+    <Copyright>2024|EdgeLordKirito</Copyright>
+    <PackAsTool>True</PackAsTool>
+    <ToolCommandName>Mp3Cut</ToolCommandName>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>Beta release use without warranty</PackageReleaseNotes>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/EdgeLordKirito/FFmpegCliMp3Cutter</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/EdgeLordKirito/FFmpegCliMp3Cutter</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +40,14 @@
 
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
