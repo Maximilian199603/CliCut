@@ -4,7 +4,6 @@ using System.Text;
 namespace FFmpegCliMp3Cutter;
 internal class App
 {
-    //remove file extension checking
     private string[] args;
 
     public App(string[] args)

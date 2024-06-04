@@ -158,7 +158,7 @@ internal sealed class CliCommand : Command<CliCommand.Settings>
             return (string.Empty, errorValue);
         }
         string extension = info.Extension[1..];
-        var audios = Enum.GetNames(typeof(SupportedAudio)).ToList();
+        var audios = Enum.GetNames(typeof(SupportedFiles)).ToList();
         if (!audios.Contains(extension))
         {
             errorValue = 4;
