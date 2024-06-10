@@ -64,6 +64,10 @@ internal class FFmpegCutTask
             return null;
         }
 
+        //Due to ffmpeg removing metadata if not cut from 00:00:00.000000
+        // any front cut will remove the cover art or metadata
+        // a procedure will be needed to handle that case
+
         try
         {
             var result = await Cli.Wrap("ffmpeg")
